@@ -28,6 +28,7 @@ impl AOC {
         count
     }
 
+    // Used this video (https://www.youtube.com/watch?v=EcnNCmHXM4c) for...
     pub fn day_one_part_two(contents: &String) -> i32 {
         let contents = contents.replace("R", "").replace("L", "-");
         let mut dial = 50;
@@ -41,6 +42,7 @@ impl AOC {
             .collect();
 
         for turn in contents_vec {
+            // ... this part
             let div_val = if turn < 0 { turn / -100 } else { turn / 100 };
             let mod_val = if turn < 0 { turn % -100 } else { turn % 100 };
             count += div_val;
