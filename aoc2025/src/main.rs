@@ -99,6 +99,7 @@ impl AOC {
         total_invalid
     }
 
+    // Used https://www.youtube.com/watch?v=LTT93lHogRM for this solution
     pub fn day_two_part_two(contents: &String) -> i128 {
         let mut total_invalid: i128 = 0;
         let range_vec: Vec<&str> = contents.split(",").collect();
