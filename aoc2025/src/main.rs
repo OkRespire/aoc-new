@@ -51,7 +51,8 @@ impl AOC {
                 count += 1
             }
 
-            dial = ((dial + turn) % 100 + 100) % 100;
+            // dial = ((dial + turn) % 100 + 100) % 100;
+            dial = (dial + turn).rem_euclid(100);
         }
 
         count
