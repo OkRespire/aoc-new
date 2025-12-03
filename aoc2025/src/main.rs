@@ -156,6 +156,57 @@ impl AOC {
 
         total_invalid
     }
+
+    pub fn day_three_part_one(contents: &String) -> i32 {
+        let mut count = 0;
+
+        let batteries_line: Vec<&str> = contents.trim().split("\n").collect();
+
+        for bat in batteries_line {
+            let mut best_num = 0;
+            for i in 0..bat.len() - 1 {
+                for j in (i + 1)..bat.len() {
+                    let new_num = {
+                        let new_num_str = format!(
+                            "{}{}",
+                            bat.chars().nth(i).unwrap(),
+                            bat.chars().nth(j).unwrap()
+                        );
+                        let new_num = match new_num_str.parse::<i32>() {
+                            Ok(num) => num,
+                            Err(_) => {
+                                eprintln!(
+                                    "Warning: Could not parse start number from '{}'. Skipping.",
+                                    new_num_str
+                                );
+                                continue;
+                            }
+                        };
+                        new_num
+                    };
+                    if new_num > best_num {
+                        best_num = new_num
+                    }
+                }
+            }
+            count += best_num;
+        }
+
+        count
+    }
+
+    pub fn day_three_part_two(contents: &String) -> i32 {
+        let mut count = 0;
+
+        let batteries_line: Vec<&str> = contents.trim().split("\n").collect();
+
+        for bat in batteries_line {
+            let mut best_num = 0;
+            count += best_num;
+        }
+
+        count
+    }
 }
 fn day1() -> Result<(), Error> {
     let mut day1_file =
@@ -165,7 +216,7 @@ fn day1() -> Result<(), Error> {
     let day1_answer_part1 = AOC::day_one_part_one(&contents);
     let day1_answer_part2 = AOC::day_one_part_two(&contents);
     println!(
-        "---Day 1 Answers ---\nPart1: {}\nPart2: {}",
+        "---Day 1 Answers---\nPart1: {}\nPart2: {}\n-------------------",
         day1_answer_part1, day1_answer_part2,
     );
 
@@ -181,8 +232,23 @@ fn day2() -> Result<(), Error> {
     let day2_answer_part2 = AOC::day_two_part_two(&contents);
 
     println!(
-        "---Day 2 Answers ---\nPart1: {}\nPart2: {}",
+        "---Day 2 Answers---\nPart1: {}\nPart2: {}\n-------------------",
         day2_answer_part1, day2_answer_part2,
+    );
+    Ok(())
+}
+
+fn day3() -> Result<(), Error> {
+    let mut day3_file =
+        File::open("/home/respire/Desktop/advent-of-code/aoc2025/input/daythree.txt")?;
+    let mut contents = String::new();
+    day3_file.read_to_string(&mut contents)?;
+    let day3_answer_part1 = AOC::day_three_part_one(&contents);
+    let day3_answer_part2 = AOC::day_three_part_two(&contents);
+
+    println!(
+        "---Day 3 Answers---\nPart1: {}\nPart2: {}\n-------------------",
+        day3_answer_part1, day3_answer_part2,
     );
     Ok(())
 }
@@ -190,6 +256,7 @@ fn day2() -> Result<(), Error> {
 fn main() -> Result<(), Error> {
     day1()?;
     day2()?;
+    day3()?;
 
     Ok(())
 }
